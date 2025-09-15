@@ -1,6 +1,6 @@
 import { API_KEY } from "@env";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 interface WeatherData {
   name: string;
@@ -38,16 +38,28 @@ export default function App() {
   }, []);
 
   return (
-    <View>
-      <Text>Expo Weather App</Text>
-      {weather ? (
-        <>
-        <Text>{weather.name}</Text>
-        <Text>{weather.main.temp}</Text>
-        <Text>{weather.weather[0].description}</Text>
-        </>
+    <View style={styles.container}>
+      <Text style={styles.title}>Expo Weather App</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+        style={styles.input}
+        value={city}
+        onChangeText={setCity}
+        placeholder="Skriv stad"
+        />
+        <Button title="Hämta väder" onPress={() => fetchWeather(city)} />
+      </View>
+
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />
+      ) : weather ? (
+      <View style={styles.weatherContainer}>
+        <Text style={styles.city}>{weather.name}</Text>
+        <Text style={styles.temp}>{weather.main.temp} °C</Text>
+        <Text style={styles.desc}>{weather.weather[0].description}</Text>
+      </View>
       ) : (
-        <Text>Loading weather...</Text>
+        <Text style={{ marginTop: 20 }}>Ingen data att visa</Text>
       )}
     </View>
   );
