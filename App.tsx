@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { API_KEY } from "@env";
+import { useEffect, useState } from "react";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [weather, setWeather] = useState<any>(null);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const city = "Stockholm";
+        const response = await fetch (
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
+        const data = await response.json();
+        setWeather(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+}
