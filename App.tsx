@@ -1,5 +1,6 @@
 import { API_KEY } from "@env";
 import { useEffect, useState } from "react";
+import { Text, View } from 'react-native';
 
 export default function App() {
   const [weather, setWeather] = useState<any>(null);
@@ -20,4 +21,19 @@ export default function App() {
 
     fetchWeather();
   }, []);
+
+  return (
+    <View>
+      <Text>Expo Weather App</Text>
+      {weather ? (
+        <>
+        <Text>{weather.name}</Text>
+        <Text>{weather.main.temp}</Text>
+        <Text>{weather.weather[0].description}</Text>
+        </>
+      ) : (
+        <Text>Loading weather...</Text>
+      )}
+    </View>
+  );
 }
