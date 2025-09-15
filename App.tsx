@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     paddingTop: 60,
+    backgroundColor: '#87CEEB'
   },
   title: {fontSize: 28, fontWeight: 'bold', marginBottom: 20 },
   inputContainer: { flexDirection: 'row', marginBottom: 20 },
