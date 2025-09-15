@@ -1,1 +1,0 @@
-# expo-weather-app
